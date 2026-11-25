@@ -131,10 +131,16 @@ def gravar(negocios, usuarios, avaliacoes, uri, usuario, senha, tamanho_lote):
 
     driver = GraphDatabase.driver(uri, auth=(usuario, senha))
     with driver, driver.session() as s:
-        s.run("CREATE CONSTRAINT user_id_unico IF NOT EXISTS "
-              "FOR (u:User) REQUIRE u.id IS UNIQUE").consume()
-        s.run("CREATE CONSTRAINT business_id_unico IF NOT EXISTS "
-              "FOR (b:Business) REQUIRE b.id IS UNIQUE").consume()
+        for comando in (
+            "CREATE CONSTRAINT user_id_unico IF NOT EXISTS "
+            "FOR (u:User) REQUIRE u.id IS UNIQUE",
+            "CREATE CONSTRAINT business_id_unico IF NOT EXISTS "
+            "FOR (b:Business) REQUIRE b.id IS UNIQUE",
+        ):
+            try:
+                s.run(comando).consume()
+            except Exception as erro:  # noqa: BLE001
+                print(f"Aviso: restrição não criada ({erro}). Seguindo com a carga.")
 
         for lote in em_lotes(list(negocios.values()), tamanho_lote):
             s.run("UNWIND $linhas AS l MERGE (b:Business {id: l.id}) "
@@ -153,7 +159,6 @@ def gravar(negocios, usuarios, avaliacoes, uri, usuario, senha, tamanho_lote):
                   "MERGE (u)-[r:REVIEWED {id: l.id}]->(b) "
                   "SET r.stars=l.stars, r.text=l.text, r.date=l.date",
                   linhas=lote).consume()
-
 
 def main():
     p = argparse.ArgumentParser(description="Importa um subconjunto do Yelp para o Neo4j")
