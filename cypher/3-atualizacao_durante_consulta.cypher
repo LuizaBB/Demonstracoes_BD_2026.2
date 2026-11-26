@@ -8,13 +8,13 @@
 // Bloco 1: Ler, agregar e gravar
 
 // Verificação: encontrar o usuário para ler (confirmar se ainda está no grafo)
-MATCH (u:User {id: 'COLE_AQUI_O_ID_DO_USUARIO'})
+MATCH (u:User {id: 'RgDVC3ZUBqpEe6Y1kPhIpw'})
 RETURN u;
 
 // Execução: conta as avaliações, calcula a média e grava no nó,
 // devolvendo o nó já atualizado na mesma instrução
 // Localiza o usuário novamente, aplica novos atributos para o nó (com cáclulo de média por função nativa) e retorna o nó atualizado
-MATCH (u:User {id: 'COLE_AQUI_O_ID_DO_USUARIO'})-[r:REVIEWED]->(:Business)
+MATCH (u:User {id: 'RgDVC3ZUBqpEe6Y1kPhIpw'})-[r:REVIEWED]->(:Business)
 WITH u, count(r) AS qtd, avg(r.stars) AS media
 SET u.avaliacoes_carregadas = qtd,
     u.media_calculada       = round(media, 2)
@@ -25,7 +25,7 @@ RETURN u,
        u.media_calculada       AS media_no_grafo;
 
 // OPCIONAL: Confirmar as novas informações, com o mesmo comando do início
-MATCH (u:User {id: 'COLE_AQUI_O_ID_DO_USUARIO'})
+MATCH (u:User {id: 'RgDVC3ZUBqpEe6Y1kPhIpw'})
 RETURN u;
 
 
@@ -46,7 +46,7 @@ RETURN c,
 
 
 // OPCIONAL: Limpeza para retirar demonstração
-MATCH (u:User {id: 'COLE_AQUI_O_ID_DO_USUARIO'})
+MATCH (u:User {id: 'RgDVC3ZUBqpEe6Y1kPhIpw'})
 REMOVE u.avaliacoes_carregadas, u.media_calculada;
 
 MATCH (c:Cidade)

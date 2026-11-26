@@ -9,14 +9,14 @@
 
 // Verificar o que um usuário avaliou (1 salto a partir da âncora)
 //  Formato de grafo e tabela
-MATCH (u:User {id: 'COLE_AQUI_O_ID_DO_USUARIO'})-[r:REVIEWED]->(b:Business)
+MATCH (u:User {id: 'RgDVC3ZUBqpEe6Y1kPhIpw'})-[r:REVIEWED]->(b:Business)
 RETURN u, r, b
 ORDER BY r.stars DESC, b.name
 LIMIT 10;
 
 // Consultar quais usuários avaliaram os mesmo estabelecimentos que o âncora (2 saltos a partir da âncora)
 //  Padrão: usuário -> negócio <- outro usuário 
-MATCH (u:User {id: 'COLE_AQUI_O_ID_DO_USUARIO'})-[:REVIEWED]->(b:Business)<-[:REVIEWED]-(outro:User)
+MATCH (u:User {id: 'RgDVC3ZUBqpEe6Y1kPhIpw'})-[:REVIEWED]->(b:Business)<-[:REVIEWED]-(outro:User)
 WHERE outro <> u
 WITH u, outro, count(DISTINCT b) AS negocios_em_comum
 ORDER BY negocios_em_comum DESC, outro.name
@@ -34,7 +34,7 @@ RETURN p,
 //  Funciona como NOT EXISTS em SQL
 // Grafo: os caminhos usuário -> negócio em comum -> outro usuário -> negócio recomendado, para as 3 melhores recomendações
 // Se aparecer vazio, colocar outro âncora
-MATCH (u:User {id: 'COLE_AQUI_O_ID_DO_USUARIO'})-[r1:REVIEWED]->(:Business)<-[r2:REVIEWED]-(o:User)-[r3:REVIEWED]->(rec:Business)
+MATCH (u:User {id: 'RgDVC3ZUBqpEe6Y1kPhIpw'})-[r1:REVIEWED]->(:Business)<-[r2:REVIEWED]-(o:User)-[r3:REVIEWED]->(rec:Business)
 WHERE o <> u
   AND r1.stars >= 4
   AND r2.stars >= 4
@@ -63,10 +63,10 @@ LIMIT 25;
 // Recomendado usar 2 IDs retirados do 2º bloco de consulta
 // Pela modelação do grafo (2 nós e 1 relacionamento Avaliação)
 //  O tamanho do grafo inclui os relacionamentos
-MATCH (a:User {id: 'ID_USUARIO_A'}), (b:User {id: 'ID_USUARIO_B'})
+MATCH (a:User {id: 'RgDVC3ZUBqpEe6Y1kPhIpw'}), (b:User {id: 'bNJmIcxc_FRWxftI_vhpbg'})
 MATCH p = shortestPath((a)-[:REVIEWED*..6]-(b))
 RETURN p, length(p) AS relacionamentos_no_caminho;
 
 // Mesma consulta com a sintaxe mais recente (Neo4j 5.21+ / Cypher 25):
-MATCH p = SHORTEST 1 (a:User {id: 'ID_USUARIO_A'})-[:REVIEWED]-+(b:User {id: 'ID_USUARIO_B'})
+MATCH p = SHORTEST 1 (a:User {id: 'RgDVC3ZUBqpEe6Y1kPhIpw'})-[:REVIEWED]-+(b:User {id: 'bNJmIcxc_FRWxftI_vhpbg'})
 RETURN p, length(p) AS relacionamentos_no_caminho;
