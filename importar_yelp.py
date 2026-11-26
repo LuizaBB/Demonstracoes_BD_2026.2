@@ -1,5 +1,5 @@
 """
-Importa um SUBCONJUNTO do Yelp Open Dataset para o Neo4j, com modelo do trabalho:
+Importa subconjunto do Yelp Open Dataset (JSON) para o Neo4j em CSV (facilitar importação), com modelo:
   (:User {id,name,review_count,average_stars})
   (:Business {id,name,address,city,state,stars,review_count})
   (:User)-[:REVIEWED {id,stars,text,date}]->(:Business)
