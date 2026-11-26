@@ -1,9 +1,7 @@
-// =====================================================================
 // 04 - AGREGAÇÃO com Yelp Open Dataset
 // Como SGBD não relacional, o Neo4j apresenta agregação como alternativa ao JOIN
 // RETURN e WITH, quando não são funções de agregação (padrão) funcionam como chaves de agrupamento
 // Executar um bloco por vez
-// =====================================================================
 
 // Conferir avaliações e notas médias por cidade
 // MWITH calcula avaliações, ORDER usa resultado de avaliações depois de realizado

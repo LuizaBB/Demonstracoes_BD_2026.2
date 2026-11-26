@@ -1,10 +1,8 @@
-// =====================================================================
 // 02 - CRUD SIMPLES, modificação de Yelp Open Dataset
 // Usa IDS não relacionados ao Yelp user_lucas_01, business_tech_01, review_001
 // Executar um bloco por vez, representando a ordem de CRUD
 // Se rodar o CREATE duas vezes, a restrição de unicidade (arquivo 00)
 // recusa o segundo: rode o bloco D2 para limpar e recomece.
-// =====================================================================
 
 // CREATE: cria usuário, negócio e a avaliação que liga os dois,
 // Modelo do grafo: os dois nós novos, avaliação os ligando
@@ -35,7 +33,7 @@ RETURN u, r, b;
 // usuário e negócio permanecem
 MATCH (:User {id: 'user_lucas_01'})-[r:REVIEWED {id: 'review_001'}]->(:Business)
 DELETE r;
-// conferir se os nós continuam lá, mas sem conexão
+// OPCIONAL: Conferir se os nós continuam lá, mas sem conexão
 MATCH (n)
 WHERE n.id IN ['user_lucas_01', 'business_tech_01']
 RETURN n;
@@ -45,7 +43,9 @@ RETURN n;
 MATCH (n)
 WHERE n.id IN ['user_lucas_01', 'business_tech_01']
 DETACH DELETE n;
-// Conferir se realmente foram deletados
+
+
+// OPCIONAL: Conferir se realmente foram deletados
 //Não deve aparecer nenhum resultado
 MATCH (n)
 WHERE n.id IN ['user_lucas_01', 'business_tech_01']

@@ -1,4 +1,3 @@
-// =====================================================================
 // PREPARAÇÃO DO AMBIENTE OPCIONAL (executar uma vez, antes de qualquer demonstração ou uso)
 // Execute um comando por vez (selecione o bloco e rode).
 // Modelo de grafo (importação manual):  (:User)-[:REVIEWED]->(:Business)
@@ -6,7 +5,6 @@
 //      id_User_key      NODE_KEY          User.id
 //      id_Business_key  NODE_KEY          Business.id
 //      id_REVIEWED_key  RELATIONSHIP_KEY  REVIEWED.id
-// =====================================================================
 
 // COnferir se as restrições aparecem como:
 //      id_User_key      NODE_KEY          User.id

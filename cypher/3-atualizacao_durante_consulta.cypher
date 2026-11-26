@@ -1,9 +1,7 @@
-// =====================================================================
 // 03 - ATUALIZAÇÃO DURANTE CONSULTAS
 // Cypher permite ler, calcular, gravar e retornar valores já atualizados
 //  dentro de uma instrução
 // Execute um bloco por vez. Use o mesmo id de usuário do arquivo 01.
-// =====================================================================
 
 // Bloco 1: Ler, agregar e gravar
 

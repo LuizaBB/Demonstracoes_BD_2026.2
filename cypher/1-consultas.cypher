@@ -1,11 +1,9 @@
-// =====================================================================
 // 01 - CONSULTAS (Yelp no Neo4j)
 // Modelo usado (importação manual): (:User)-[:REVIEWED]->(:Business)
-// Substituir por IDs reais (extraídos da preparação ou consultas manuais)
+// Já aplicados IDs reais do Yelp Open Dataset
 // Para mostrar o plano de execução, escrever PROFILE antes do início de cada comando. Exemplo:
 // PROFILE
 // MATCH (...) resto do código
-// =====================================================================
 
 // Verificar o que um usuário avaliou (1 salto a partir da âncora)
 //  Formato de grafo e tabela
